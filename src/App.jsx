@@ -745,6 +745,11 @@ function App() {
               {isWalletBusy ? 'Opening wallets...' : 'Connect wallet'}
             </button>
           )}
+          {selectedPollId && (
+            <button className="ghost-button small" onClick={dismissSelectedPoll} type="button">
+              Close selected poll
+            </button>
+          )}
         </div>
       </header>
 
@@ -813,6 +818,14 @@ function App() {
               <div>
                 <dt>Last sync</dt>
                 <dd>{formatDateTime(lastSyncedAt)}</dd>
+              </div>
+              <div>
+                <dt>Selected poll</dt>
+                <dd>
+                  {selectedPoll
+                    ? `${selectedPollState || 'unknown'} · ${selectedPollTotalVotes} vote${selectedPollTotalVotes !== 1 ? 's' : ''}`
+                    : 'None selected'}
+                </dd>
               </div>
             </dl>
           </article>
@@ -1087,6 +1100,13 @@ function App() {
 
                     {/* Footer: status hint + owner actions */}
                     <div className="poll-card-footer">
+                        <button
+                          className="ghost-button small"
+                          onClick={() => openPollDetails(poll.id)}
+                          type="button"
+                        >
+                          Details
+                        </button>
                       {state === 'active' && !wallet?.address && (
                         <button className="connect-hint" onClick={handleConnectWallet} type="button">
                           Connect wallet to vote
