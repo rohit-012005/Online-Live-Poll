@@ -58,6 +58,15 @@ This project demonstrates:
   </tr>
 </table>
 
+## Mobile responsive screenshots
+
+Below is a mobile view screenshot demonstrating the responsive layout on narrow screens. Replace the placeholder with a real phone-sized screenshot captured from the dev tools or a device.
+
+<div align="center">
+  <img src="/assets/screenshots/mobile-responsive.svg" alt="Mobile responsive screenshot" style="max-width:360px; width:100%; border-radius:12px; border:1px solid rgba(0,0,0,0.08);" />
+</div>
+
+
 ## Deployed Contract
 
 - Network: `Stellar Testnet`

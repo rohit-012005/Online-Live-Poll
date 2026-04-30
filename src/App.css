@@ -1126,8 +1126,9 @@
     align-items: flex-start;
   }
 
+  /* Stack stats on small tablets and below for readability */
   .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .controls-head {
@@ -1147,6 +1148,24 @@
   .result-bar-shell {
     grid-column: auto;
   }
+
+  /* Make poll cards and options more compact on narrow screens */
+  .poll-card {
+    padding: 0.75rem;
+  }
+
+  .poll-option-btn {
+    padding: 0.5rem 0.625rem;
+  }
+
+  .poll-option-meta {
+    white-space: normal;
+    font-size: 0.75rem;
+  }
+
+  .wallet-disconnect-label {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1156,6 +1175,15 @@
 
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Ensure poll grid uses single column on small phones */
+  .poll-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-input {
+    min-width: 0;
   }
 
   .notice {
