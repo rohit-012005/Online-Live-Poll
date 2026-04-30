@@ -1,4 +1,5 @@
 #![no_std]
+#![allow(deprecated)]
 
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype, panic_with_error, symbol_short, Address,
@@ -52,7 +53,7 @@ fn poll_or_error(env: &Env, poll_id: u32) -> Poll {
 }
 
 fn validate_poll_input(env: &Env, question: &String, options: &Vec<String>, duration_minutes: u64) {
-    if question.len() == 0 {
+    if question.is_empty() {
         panic_with_error!(env, PollError::InvalidQuestion);
     }
 
@@ -61,7 +62,7 @@ fn validate_poll_input(env: &Env, question: &String, options: &Vec<String>, dura
     }
 
     for option in options.iter() {
-        if option.len() == 0 {
+        if option.is_empty() {
             panic_with_error!(env, PollError::InvalidOption);
         }
     }
