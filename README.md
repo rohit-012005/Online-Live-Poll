@@ -4,8 +4,8 @@ LivePoll is a mini end-to-end Stellar + Soroban dApp: a multi-wallet polling app
 
 ## Level 3 Submission Checklist (fill before submitting)
 
-- Live demo link: `https://livepoll-njy1ayhqq-sagar522290s-projects.vercel.app/`
-- Demo video (1 minute) link: TODO
+- Live demo link: https://online-live-poll.vercel.app/
+- Demo video (1 minute) link: https://drive.google.com/file/d/1SRK_eF2qJyIfuN-KMlgzCpeacAeYJ23t/view?usp=sharing
 - Test output screenshot (3+ passing tests): ✅ (see below)
 - Public GitHub repo link: `https://github.com/Sagar522290/livepoll.git`
 - 3+ meaningful commits for Level 3: ✅
@@ -61,7 +61,7 @@ Wallet options available:
 
 ## Live Demo
 
-- TODO: add a deployed Vercel, Netlify, or similar link here before final submission
+https://online-live-poll.vercel.app/
 
 ## Setup
 
@@ -151,7 +151,9 @@ This is a standard Vite build.
 
 ## Demo Video (1 minute)
 
-Suggested recording flow:
+https://drive.google.com/file/d/1SRK_eF2qJyIfuN-KMlgzCpeacAeYJ23t/view?usp=sharing
+
+Walkthrough:
 
 1. Open the deployed site and show the “Read from contract” panel updating.
 2. Connect a wallet (Freighter or any supported wallet).
