@@ -36,15 +36,34 @@ This project demonstrates:
 - See transaction phases in the UI: `preparing`, `awaiting-signature`, `pending`, `success`, and `error`
 - Refresh poll state automatically from recent on-chain contract events
 
-## Screenshot
+## Screenshots
 
-Website preview:
-
-![LivePoll website screenshot](./public/app-screenshot.png)
-
-Wallet options available:
-
-![Wallet options preview](./public/wallet-options-preview.svg)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>🏠 Home Page</strong><br/><br/>
+      <img src="./public/screenshots/home.png" alt="Home Page" width="100%"/>
+      <br/><em>Add screenshot: home.png</em>
+    </td>
+    <td align="center" width="50%">
+      <strong>📝 Create Poll</strong><br/><br/>
+      <img src="./public/screenshots/create-poll.png" alt="Create Poll" width="100%"/>
+      <br/><em>Add screenshot: create-poll.png</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>🗳️ Voting</strong><br/><br/>
+      <img src="./public/screenshots/voting.png" alt="Voting" width="100%"/>
+      <br/><em>Add screenshot: voting.png</em>
+    </td>
+    <td align="center" width="50%">
+      <strong>✅ CI/CD Results</strong><br/><br/>
+      <img src="./public/screenshots/ci-cd.png" alt="CI/CD Results" width="100%"/>
+      <br/><em>Add screenshot: ci-cd.png</em>
+    </td>
+  </tr>
+</table>
 
 ## Deployed Contract
 
