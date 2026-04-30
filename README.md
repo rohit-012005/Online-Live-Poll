@@ -63,7 +63,8 @@ This project demonstrates:
 Below is a mobile view screenshot demonstrating the responsive layout on narrow screens. Replace the placeholder with a real phone-sized screenshot captured from the dev tools or a device.
 
 <div align="center">
-  <img src="/assets/screenshots/mobile-responsive.svg" alt="Mobile responsive screenshot" style="max-width:360px; width:100%; border-radius:12px; border:1px solid rgba(0,0,0,0.08);" />
+<img width="389" height="700" alt="2026-04-30_18-25-47" src="https://github.com/user-attachments/assets/23b9e24d-e978-4e81-9db3-dc2976486253" />
+
 </div>
 
 
