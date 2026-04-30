@@ -696,13 +696,9 @@ function App() {
       <div className="ambient ambient-right" />
 
       <header className="topbar">
-        <div>
-          <p className="eyebrow">Stellar Level 2</p>
-          <h1>LivePoll Testnet Control Room</h1>
-          <p className="subtitle">
-            Multi-wallet voting, contract-backed poll storage, live event sync, and
-            visible transaction state on Stellar testnet.
-          </p>
+        <div className="topbar-brand">
+          <h1>LivePoll</h1>
+          <p>On-chain polls on Stellar Testnet — create, vote, and track results in real time.</p>
         </div>
 
         <div className="topbar-actions">
@@ -769,13 +765,12 @@ function App() {
       <main className="dashboard">
         <section className="hero-grid">
           <article className="panel hero-card">
-            <div className="hero-card-copy">
-              <p className="section-label">Wallet options available</p>
-              <h2>One poll contract, many wallet entry points</h2>
+            <div>
+              <p className="section-label">Supported wallets</p>
+              <h2>Connect any Stellar wallet to vote</h2>
               <p>
-                The app is wired for {SUPPORTED_WALLET_NAMES.length}+ Stellar wallets through
-                StellarWalletsKit. Use any supported wallet to create polls, cast votes, and
-                close polls directly from the frontend.
+                Works with {SUPPORTED_WALLET_NAMES.length}+ wallets via StellarWalletsKit.
+                Create polls, cast votes, and close polls directly from the browser.
               </p>
             </div>
 
@@ -833,8 +828,8 @@ function App() {
           <article className="panel compose-panel">
             <div className="panel-head">
               <div>
-                <p className="section-label">Write to contract</p>
-                <h3>Create a poll</h3>
+                <p className="section-label">Create a poll</p>
+                <h3>Ask the community something</h3>
               </div>
               <span className="panel-meta">{wallet ? shortenAddress(wallet.address) : 'Wallet required'}</span>
             </div>
@@ -910,8 +905,8 @@ function App() {
           <article className="panel sync-panel">
             <div className="panel-head">
               <div>
-                <p className="section-label">Read from contract</p>
-                <h3>Live sync overview</h3>
+                <p className="section-label">Live sync</p>
+                <h3>Contract activity</h3>
               </div>
               <button className="secondary-button" onClick={() => refreshPollState()} type="button">
                 {isRefreshing || isBooting ? 'Refreshing...' : 'Refresh now'}
@@ -989,10 +984,10 @@ function App() {
         </section>
 
         <section className="panel poll-panel">
-          <div className="panel-head controls-head">
+          <div className="controls-head">
             <div>
               <p className="section-label">Poll feed</p>
-              <h3>Browse synced contract data</h3>
+              <h3>Browse &amp; vote on polls</h3>
             </div>
 
             <div className="control-strip">
