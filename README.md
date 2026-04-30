@@ -7,12 +7,9 @@ LivePoll is a mini end-to-end Stellar + Soroban dApp: a multi-wallet polling app
 - Live demo link: https://online-live-poll.vercel.app/
 - Demo video (1 minute) link: https://drive.google.com/file/d/1SRK_eF2qJyIfuN-KMlgzCpeacAeYJ23t/view?usp=sharing
 - Test output screenshot (3+ passing tests): ✅ (see below)
-- Public GitHub repo link: `https://github.com/Sagar522290/livepoll.git`
+- Public GitHub repo link: `https://github.com/rohit-012005/Online-Live-Poll.git`
 - 3+ meaningful commits for Level 3: ✅
 
-## Test Output (Screenshot)
-
-![Test output showing 3+ passing tests](./public/tests-passing.svg)
 
 ## Submission Overview
 
@@ -56,8 +53,7 @@ This project demonstrates:
     </td>
     <td align="center" width="50%">
       <strong>✅ CI/CD Results</strong><br/><br/>
-      <img src="./public/screenshots/ci-cd.png" alt="CI/CD Results" width="100%"/>
-      <br/><em>Add screenshot: ci-cd.png</em>
+    <img width="1426" height="830" alt="image" src="https://github.com/user-attachments/assets/ae849647-7b8a-412e-92b8-0fb1532a5c4a" />
     </td>
   </tr>
 </table>
