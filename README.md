@@ -38,24 +38,21 @@ This project demonstrates:
 
 ## Screenshots
 
-<table>
+<table width="100%">
   <tr>
     <td align="center" width="50%">
       <strong>🏠 Home Page</strong><br/><br/>
-      <img src="./public/screenshots/home.png" alt="Home Page" width="100%"/>
-      <br/><em>Add screenshot: home.png</em>
+      <img width="2848" height="1572" alt="screenshot_visible_2026-04-30_17-06-27" src="https://github.com/user-attachments/assets/a1c8793f-aae9-44ed-803f-04a436d5fedd" />
     </td>
     <td align="center" width="50%">
       <strong>📝 Create Poll</strong><br/><br/>
-      <img src="./public/screenshots/create-poll.png" alt="Create Poll" width="100%"/>
-      <br/><em>Add screenshot: create-poll.png</em>
+   <img width="2848" height="1572" alt="screenshot_visible_2026-04-30_17-14-55" src="https://github.com/user-attachments/assets/1e63b7cd-6ce2-4ef4-a07b-1ecae1771c22" />
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
       <strong>🗳️ Voting</strong><br/><br/>
-      <img src="./public/screenshots/voting.png" alt="Voting" width="100%"/>
-      <br/><em>Add screenshot: voting.png</em>
+   <img width="2848" height="1572" alt="screenshot_visible_2026-04-30_17-17-31" src="https://github.com/user-attachments/assets/b962d4ce-2b4e-42e4-9f8e-29774f78538d" />
     </td>
     <td align="center" width="50%">
       <strong>✅ CI/CD Results</strong><br/><br/>
