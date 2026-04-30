@@ -1028,56 +1028,106 @@ function App() {
               {visiblePolls.map((poll) => {
                 const totalVotes = poll.votes.reduce((sum, vote) => sum + vote, 0)
                 const state = getPollState(poll)
+                const hasVoted = Boolean(voteLookup[poll.id])
+                const voteAction = getVoteActionState({
+                  poll,
+                  walletAddress: wallet?.address,
+                  hasVoted,
+                  transactionPhase: transaction.phase,
+                  isWalletBusy,
+                })
+                const isOwner = isPollOwner(poll, wallet?.address)
 
                 return (
-                  <article
-                    key={poll.id}
-                    className={selectedPoll?.id === poll.id ? 'poll-card selected' : 'poll-card'}
-                  >
+                  <article key={poll.id} className="poll-card">
+                    {/* Card header */}
                     <div className="poll-card-head">
                       <span className={`state-pill ${state}`}>{state}</span>
                       <span className="time-pill">{formatTimeLeft(poll.expiresAt)}</span>
                     </div>
 
+                    {/* Question */}
                     <h4>{poll.question}</h4>
                     <p className="poll-meta">
-                      Poll #{poll.id} by {shortenAddress(poll.creator)}
+                      {totalVotes} vote{totalVotes !== 1 ? 's' : ''} · Poll #{poll.id}
                     </p>
-                    <p className="poll-meta">{totalVotes} votes recorded on-chain</p>
 
-                    <div className="option-preview">
-                      {poll.options.slice(0, 3).map((option) => (
-                        <span key={option}>{option}</span>
-                      ))}
+                    {/* Options with vote buttons + progress bars */}
+                    <div className="poll-options">
+                      {poll.options.map((option, index) => {
+                        const votes = poll.votes[index] || 0
+                        const percentage = totalVotes === 0 ? 0 : Math.round((votes / totalVotes) * 100)
+                        const canVote = voteAction.action === 'vote' || voteAction.action === 'connect'
+
+                        return (
+                          <div key={`${poll.id}-${option}`} className="poll-option">
+                            <button
+                              className={`poll-option-btn${hasVoted || state === 'closed' ? ' voted' : ''}`}
+                              onClick={() =>
+                                voteAction.action === 'connect'
+                                  ? handleConnectWallet()
+                                  : canVote
+                                    ? handleVote(poll.id, index)
+                                    : undefined
+                              }
+                              disabled={voteAction.disabled && voteAction.action !== 'connect'}
+                              type="button"
+                              title={voteAction.action === 'connect' ? 'Connect wallet to vote' : undefined}
+                            >
+                              <span className="poll-option-label">{option}</span>
+                              <span className="poll-option-meta">{votes} · {percentage}%</span>
+                            </button>
+                            <div className="poll-option-bar">
+                              <div className="poll-option-bar-fill" style={{ width: `${percentage}%` }} />
+                            </div>
+                          </div>
+                        )
+                      })}
                     </div>
 
-                    <div className="card-actions">
-                      <button className="secondary-button" onClick={() => openPollDetails(poll.id)} type="button">
-                        View details
-                      </button>
-                      <div className="detail-actions">
-                        <button
-                          className="ghost-button"
-                          onClick={() => {
-                            const shareLink = `${window.location.origin}${window.location.pathname}${window.location.search}#poll-${poll.id}`
-                            navigator.clipboard
-                              .writeText(shareLink)
-                              .then(() => {
-                                showNotice('info', 'Share link copied', `Link copied for poll #${poll.id}.`)
-                              })
-                              .catch(() => {
-                                showNotice(
-                                  'error',
-                                  'Copy failed',
-                                  'Clipboard access was blocked, so the share link could not be copied.',
-                                )
-                              })
-                          }}
-                          type="button"
-                        >
-                          Copy link
+                    {/* Footer: status hint + owner actions */}
+                    <div className="poll-card-footer">
+                      {state === 'active' && !wallet?.address && (
+                        <button className="connect-hint" onClick={handleConnectWallet} type="button">
+                          Connect wallet to vote
                         </button>
-                      </div>
+                      )}
+                      {state === 'active' && hasVoted && (
+                        <span className="voted-badge">✓ You voted</span>
+                      )}
+                      {state === 'active' && wallet?.address && !hasVoted && voteAction.action === 'pending' && (
+                        <span className="poll-meta">Submitting…</span>
+                      )}
+
+                      {isOwner && state === 'active' && (
+                        <div className="owner-actions">
+                          <button
+                            className="ghost-button small"
+                            onClick={() => handleClosePoll(poll.id)}
+                            type="button"
+                          >
+                            Close
+                          </button>
+                          <button
+                            className="ghost-button small danger"
+                            onClick={() => handleMenuDeletePoll(poll.id)}
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                      {isOwner && state === 'closed' && (
+                        <div className="owner-actions">
+                          <button
+                            className="ghost-button small danger"
+                            onClick={() => handleMenuDeletePoll(poll.id)}
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </article>
                 )
@@ -1086,109 +1136,6 @@ function App() {
           )}
         </section>
 
-        {selectedPoll && (
-          <section className="panel detail-panel" id={`poll-${selectedPoll.id}`}>
-            <div className="panel-head">
-              <div>
-                <p className="section-label">Selected poll</p>
-                <h3>{selectedPoll.question}</h3>
-              </div>
-              <div className="detail-head-actions">
-                {isPollOwner(selectedPoll, wallet?.address) && selectedPollState === 'active' && (
-                  <button
-                    className="secondary-button"
-                    onClick={() => handleClosePoll(selectedPoll.id)}
-                    type="button"
-                  >
-                    Close poll
-                  </button>
-                )}
-                <button className="ghost-button" onClick={dismissSelectedPoll} type="button">
-                  Dismiss
-                </button>
-              </div>
-            </div>
-
-            <p className="detail-meta">
-              Created by {shortenAddress(selectedPoll.creator)} on{' '}
-              {new Date(selectedPoll.createdAt).toLocaleString()}
-            </p>
-            <p className="detail-meta">Expires {new Date(selectedPoll.expiresAt).toLocaleString()}</p>
-
-            <div className="detail-summary">
-              <span className={`state-pill ${selectedPollState}`}>{selectedPollState}</span>
-              <span className="panel-meta">{selectedPollTotalVotes} total votes</span>
-              <span className="time-pill">{formatTimeLeft(selectedPoll.expiresAt)}</span>
-            </div>
-
-            <div className="results-stack">
-              {selectedPoll.options.map((option, index) => {
-                const votes = selectedPoll.votes[index] || 0
-                const percentage =
-                  selectedPollTotalVotes === 0
-                    ? 0
-                    : Math.round((votes / selectedPollTotalVotes) * 100)
-                const voteAction = getVoteActionState({
-                  poll: selectedPoll,
-                  walletAddress: wallet?.address,
-                  hasVoted: Boolean(voteLookup[selectedPoll.id]),
-                  transactionPhase: transaction.phase,
-                  isWalletBusy,
-                })
-
-                return (
-                  <div key={`${selectedPoll.id}-${option}`} className="result-row">
-                    <div className="result-copy">
-                      <span>{option}</span>
-                      <span>
-                        {votes} votes • {percentage}%
-                      </span>
-                    </div>
-
-                    <div className="result-bar-shell">
-                      <div className="result-bar-fill" style={{ width: `${percentage}%` }} />
-                    </div>
-
-                    <button
-                      className="primary-button small"
-                      onClick={() =>
-                        voteAction.action === 'connect'
-                          ? handleConnectWallet()
-                          : handleVote(selectedPoll.id, index)
-                      }
-                      disabled={voteAction.disabled}
-                      type="button"
-                    >
-                      {voteAction.label}
-                    </button>
-                  </div>
-                )
-              })}
-            </div>
-
-            <div className="detail-footer">
-              <div>
-                <p className="detail-note">
-                  Votes, closures, and deletions are written on-chain, then reloaded through the
-                  event sync loop.
-                </p>
-                <p className="detail-note">
-                  Connected wallet: {wallet ? wallet.walletName : 'No wallet connected'}
-                </p>
-              </div>
-
-              {isPollOwner(selectedPoll, wallet?.address) && (
-                <button
-                  className="secondary-button danger"
-                  onClick={() => handleMenuDeletePoll(selectedPoll.id)}
-                  type="button"
-                >
-                  Delete poll
-                </button>
-              )}
-            </div>
-          </section>
-        )}
       </main>
     </div>
   )
