@@ -12,10 +12,10 @@ This folder contains the Soroban smart contract used by LivePoll for storing pol
 ## Network Details
 
 - Network: `Stellar Testnet`
-- Contract address: `CBGJGJOFFSY5KK7DHFENNBGASXROVG5GEW2MISGJ2N2F7VLHCCUJ42UA`
-- Contract explorer: https://stellar.expert/explorer/testnet/contract/CBGJGJOFFSY5KK7DHFENNBGASXROVG5GEW2MISGJ2N2F7VLHCCUJ42UA
-- Sample contract call tx hash: `282d8793c1968e02b32d6d23d688b930a01c316056c908acfd6b685b8089f67e`
-- Sample call explorer: https://stellar.expert/explorer/testnet/tx/282d8793c1968e02b32d6d23d688b930a01c316056c908acfd6b685b8089f67e
+- Contract address: `CDPYFRUN6ZRKUIKZR45AMWF7SYPQJL4WRJIBJI2SR3DWRMMANTXXRMD2`
+- Contract explorer: https://stellar.expert/explorer/testnet/contract/CDPYFRUN6ZRKUIKZR45AMWF7SYPQJL4WRJIBJI2SR3DWRMMANTXXRMD2
+- Sample contract call tx hash: `e5a4df2c3ef97235d1b33ebe043cb66ab5642d53f0319caabc9f98e2239712c8`
+- Sample call explorer: https://stellar.expert/explorer/testnet/tx/e5a4df2c3ef97235d1b33ebe043cb66ab5642d53f0319caabc9f98e2239712c8
 
 ## Build
 
